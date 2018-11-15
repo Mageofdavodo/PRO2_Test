@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_144"/>
+	<classpathentry kind="src" path="opgave02_counter"/>
+	<classpathentry kind="src" path="opgave03_Archi"/>
+	<classpathentry kind="src" path="opgave04_personAdministrator"/>
+	<classpathentry kind="src" path="opgave05_Adapter"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

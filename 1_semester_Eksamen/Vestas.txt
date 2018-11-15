@@ -1,0 +1,5 @@
+Vestas kontraker: 
+
+Tester Timer per uge: 37 2018-07-01 2018-09-16
+Programmør Timer per uge: 15 2018-02-14 2018-06-06
+Analytiker Timer per uge: 12 2018-02-14 2018-04-06
