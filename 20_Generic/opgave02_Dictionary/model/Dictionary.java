@@ -1,19 +1,16 @@
 package model;
 
-
 import java.util.LinkedList;
-@SuppressWarnings({"rawtypes", "unchecked"})
+
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class Dictionary<K, V> implements IDictionary<K, V> {
 
-	
 	private LinkedList<Node> link;
-	
+
 	public Dictionary() {
 		this.link = new LinkedList<>();
 	}
 
-	
-	
 	@Override
 	public V get(K key) {
 		for (Node node : link) {
@@ -43,11 +40,11 @@ public class Dictionary<K, V> implements IDictionary<K, V> {
 			}
 			i++;
 		}
-			Node node = new Node();
-			node.key = key;
-			node.value = value;
-			link.add(node);
-			return null;
+		Node node = new Node();
+		node.key = key;
+		node.value = value;
+		link.add(node);
+		return null;
 	}
 
 	@Override
@@ -59,8 +56,7 @@ public class Dictionary<K, V> implements IDictionary<K, V> {
 				V value = (V) node.value;
 				link.remove(i);
 				return value;
-			}
-			else {
+			} else {
 				i++;
 			}
 		}
@@ -73,7 +69,8 @@ public class Dictionary<K, V> implements IDictionary<K, V> {
 	}
 
 }
-class Node<K, V>{
+
+class Node<K, V> {
 	K key;
 	V value;
 }

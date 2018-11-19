@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="opgave01_ArrayStack"/>
+	<classpathentry kind="src" path="opgave02_parenteser"/>
+	<classpathentry kind="src" path="opgave03_DropOutStack"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
