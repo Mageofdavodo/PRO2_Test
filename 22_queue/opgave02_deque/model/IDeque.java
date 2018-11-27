@@ -3,7 +3,7 @@ package model;
 /**
  * An interface of a deque
  */
-public interface Deque {
+public interface IDeque {
 
 	/**
 	 * Checks whether this deque is empty.

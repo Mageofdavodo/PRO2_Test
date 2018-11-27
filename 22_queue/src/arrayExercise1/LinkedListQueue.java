@@ -1,27 +1,31 @@
 package arrayExercise1;
 
+import java.util.NoSuchElementException;
+
 import queues.Queue;
 
-public class LinkedListQueue implements Queue {
+public class LinkedListQueue<T> implements Queue<T> {
 
 	private Node first;
 	private Node last;
+	private int size;
 
 	public LinkedListQueue() {
 		first = null;
 		last = null;
+		size = 0;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		if (first == null) {
+		if (size == 0) {
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public void enqueue(Object newElement) {
+	public void enqueue(T newElement) {
 		Node currentNode = new Node();
 		currentNode.data = newElement;
 		if (isEmpty()) {
@@ -31,21 +35,26 @@ public class LinkedListQueue implements Queue {
 		}
 		last = currentNode;
 		last.next = null;
+		size++;
 
 	}
 
 	@Override
-	public Object dequeue() {
+	public T dequeue() {
 		Node temp = first;
+		if (first == null) {
+			throw new NoSuchElementException();
+		}
 		if (first.next == null) {
 			last = null;
 		}
 		first = first.next;
+		size--;
 		return temp.data;
 	}
 
 	@Override
-	public Object getFront() {
+	public T getFront() {
 		if (!isEmpty()) {
 			return first.data;
 		}
@@ -54,17 +63,11 @@ public class LinkedListQueue implements Queue {
 
 	@Override
 	public int size() {
-		int count = 0;
-		Node temp = first;
-		while (temp != null) {
-			count++;
-			temp = temp.next;
-		}
-		return count;
+		return size;
 	}
 
 	class Node {
-		public Object data;
+		public T data;
 		public Node next;
 	}
 }

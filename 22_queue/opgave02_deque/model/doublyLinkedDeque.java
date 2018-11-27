@@ -1,6 +1,8 @@
 package model;
 
-public class doublyLinkedDeque implements Deque {
+import java.util.NoSuchElementException;
+
+public class doublyLinkedDeque implements IDeque {
 
 	private class Node {
 		public Object data;
@@ -10,6 +12,7 @@ public class doublyLinkedDeque implements Deque {
 
 	private Node first;
 	private Node last;
+	private int size;
 
 	public doublyLinkedDeque() {
 		first = null;
@@ -38,7 +41,9 @@ public class doublyLinkedDeque implements Deque {
 			first = currentNode;
 			first.next = temp;
 			temp.previous = first;
+
 		}
+		size++;
 	}
 
 	@Override
@@ -56,17 +61,27 @@ public class doublyLinkedDeque implements Deque {
 			last.previous = temp;
 			temp.next = last;
 		}
+		size++;
 
 	}
 
 	@Override
 	public Object removeFirst() {
 		Node temp = new Node();
+		if (first == null) {
+			throw new NoSuchElementException();
+		}
 		temp = first;
-		Node currentNode = new Node();
-		currentNode = first.next;
-		first = currentNode;
-		first.previous = null;
+		if (first == last) {
+			first = null;
+			last = null;
+		} else {
+			Node currentNode = new Node();
+			currentNode = first.next;
+			first = currentNode;
+			first.previous = null;
+		}
+		size--;
 
 		return temp.data;
 	}
@@ -74,12 +89,20 @@ public class doublyLinkedDeque implements Deque {
 	@Override
 	public Object removeLast() {
 		Node temp = new Node();
+		if (last == null) {
+			throw new NoSuchElementException();
+		}
 		temp = last;
-		Node currentNode = new Node();
-		currentNode = last.previous;
-		last = currentNode;
-		last.next = null;
-
+		if (last == first) {
+			first = null;
+			last = null;
+		} else {
+			Node currentNode = new Node();
+			currentNode = last.previous;
+			last = currentNode;
+			last.next = null;
+		}
+		size++;
 		return temp.data;
 	}
 
@@ -95,13 +118,7 @@ public class doublyLinkedDeque implements Deque {
 
 	@Override
 	public int size() {
-		int count = 0;
-		Node temp = first;
-		while (temp != null) {
-			count++;
-			temp = temp.next;
-		}
-		return count;
+		return size;
 	}
 
 }

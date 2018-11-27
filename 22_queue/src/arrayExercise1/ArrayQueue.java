@@ -6,9 +6,9 @@ import queues.Queue;
  * An implementation of a queue using an array
  */
 
-public class ArrayQueue implements Queue {
+public class ArrayQueue<T> implements Queue<T> {
 
-	private Object[] array;
+	private T[] array;
 	private int head;
 	private int tail;
 	private int size;
@@ -17,9 +17,10 @@ public class ArrayQueue implements Queue {
 	 * Constructs an empty queue.
 	 */
 
+	@SuppressWarnings("unchecked")
 	public ArrayQueue() {
 		size = 5;
-		array = new Object[size];
+		array = (T[]) new Object[size];
 		head = 0;
 		tail = 0;
 
@@ -44,10 +45,10 @@ public class ArrayQueue implements Queue {
 	 * @param newElement the element to add
 	 */
 	@Override
-	public void enqueue(Object newElement) {
+	public void enqueue(T newElement) {
 		if (tail == size) {
-			size += 5;
-			Object[] temp = new Object[size];
+			size *= 2;
+			T[] temp = (T[]) new Object[size];
 			for (int i = head; i < tail; i++) {
 				temp[i] = array[i];
 			}
@@ -63,10 +64,9 @@ public class ArrayQueue implements Queue {
 	 * @return the removed element
 	 */
 	@Override
-	public Object dequeue() {
-		Object removedObject = getFront();
+	public T dequeue() {
+		T removedObject = getFront();
 		head++;
-
 		return removedObject;
 	}
 
@@ -76,7 +76,7 @@ public class ArrayQueue implements Queue {
 	 * @return the head element
 	 */
 	@Override
-	public Object getFront() {
+	public T getFront() {
 		if (!isEmpty()) {
 			return array[head];
 		}
