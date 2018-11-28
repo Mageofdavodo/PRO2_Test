@@ -29,22 +29,19 @@ public class HashSetLinearProbing {
 	 * @return true if x is an element of this set
 	 */
 	public boolean contains(Object x) {
-
 		int h = hashValue(x);
-		boolean found = false;
-		int i = 0;
-		while (!found && i < buckets.length) {
+		for (int i = 0; i < buckets.length; i++) {
 			if (h == buckets.length) {
 				h = 0;
 			}
-			if (buckets[h] != null && buckets[h].equals(x)) {
-				found = true;
+			if (buckets[h] == null) {
+				return false;
+			} else if (buckets[h].equals(x)) {
+				return true;
 			}
-			i++;
 			h++;
 		}
-
-		return found;
+		return false;
 	}
 
 	/**
@@ -59,12 +56,12 @@ public class HashSetLinearProbing {
 			if (h == buckets.length) {
 				h = 0;
 			}
-			if (buckets[h] == null) {
+			if (buckets[h] != null && buckets[h].equals(x)) {
+				return false;
+			} else if (buckets[h] == null || buckets[h] == State.DELETED) {
 				buckets[h] = x;
 				currentSize++;
 				return true;
-			} else if (buckets[h].equals(x)) {
-				return false;
 			}
 			h++;
 		}
@@ -81,13 +78,15 @@ public class HashSetLinearProbing {
 	 */
 	public boolean remove(Object x) {
 		int h = hashValue(x);
-
 		for (int i = 0; i < buckets.length; i++) {
 			if (h == buckets.length) {
 				h = 0;
 			}
-			if (buckets[h] != null && buckets[h].equals(x)) {
-				buckets[h] = null;
+			if (buckets[h] == null) {
+				return false;
+			} else if (buckets[h] != null && buckets[h].equals(x)) {
+				buckets[h] = State.DELETED;
+				currentSize--;
 				return true;
 			}
 			h++;

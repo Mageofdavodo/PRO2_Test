@@ -1,17 +1,19 @@
-package hashing;
+package opgave02_HashSetChain;
 
 import java.util.NoSuchElementException;
 
 /**
  * This class implements a hash set using separate chaining.
  */
-public class HashSetChaining {
-	private Node[] buckets;
+@SuppressWarnings("unchecked")
+public class HashSetChaining<T> {
+	private Node<T>[] buckets;
 	private int currentSize;
 
-	private class Node {
-		public Object data;
-		public Node next;
+	@SuppressWarnings("hiding")
+	private class Node<T> {
+		public T data;
+		public Node<T> next;
 	}
 
 	/**
@@ -19,6 +21,7 @@ public class HashSetChaining {
 	 * 
 	 * @param bucketsLength the length of the buckets array
 	 */
+
 	public HashSetChaining(int size) {
 		buckets = new Node[size];
 		currentSize = 0;
@@ -32,7 +35,7 @@ public class HashSetChaining {
 	 */
 	public boolean contains(Object x) {
 		int h = hashValue(x);
-		Node bucket = buckets[h];
+		Node<T> bucket = buckets[h];
 		boolean found = false;
 		while (!found && bucket != null) {
 			if (bucket.data.equals(x)) {
@@ -50,10 +53,10 @@ public class HashSetChaining {
 	 * @param x an object
 	 * @return true if x is a new object, false if x was already in the set
 	 */
-	public boolean add(Object x) {
+	public boolean add(T x) {
 		int h = hashValue(x);
 
-		Node bucket = buckets[h];
+		Node<T> bucket = buckets[h];
 		boolean found = false;
 		while (!found && bucket != null) {
 			if (bucket.data.equals(x)) {
@@ -62,16 +65,41 @@ public class HashSetChaining {
 				bucket = bucket.next;
 			}
 		}
-
 		if (!found) {
-			Node newNode = new Node();
+			Node<T> newNode = new Node<>();
 			newNode.data = x;
 			newNode.next = buckets[h];
 			buckets[h] = newNode;
 			currentSize++;
+			double loadFactor = 0;
+			loadFactor = 1.0 * currentSize / buckets.length;
+			if (loadFactor >= 0.75) {
+				rehash();
+			}
 		}
 
 		return !found;
+	}
+
+	public int arraySize() {
+		return buckets.length;
+	}
+
+	public void rehash() {
+		Node<T>[] tempBuckets = buckets;
+		buckets = new Node[tempBuckets.length * 2];
+		currentSize = 0;
+		for (int i = 0; i < tempBuckets.length; i++) {
+			if (tempBuckets[i] != null) {
+				Node<T> temp = tempBuckets[i];
+				while (temp != null) {
+					add((T) temp.data);
+					temp = temp.next;
+				}
+
+			}
+
+		}
 	}
 
 	/**
@@ -81,9 +109,9 @@ public class HashSetChaining {
 	 * @return true if x was removed from this set, false if x was not an element of
 	 *         this set
 	 */
-	public boolean remove(Object x) {
+	public boolean remove(T x) {
 		int h = hashValue(x);
-		Node bucket = buckets[h];
+		Node<T> bucket = buckets[h];
 		boolean found = false;
 		if (bucket == null) {
 			throw new NoSuchElementException();
@@ -107,7 +135,7 @@ public class HashSetChaining {
 				}
 			}
 			if (found) {
-				Node temp = bucket.next;
+				Node<T> temp = bucket.next;
 				bucket.next = temp.next;
 				temp.next = null;
 				currentSize--;
@@ -138,7 +166,7 @@ public class HashSetChaining {
 	public String toString() {
 		String result = "";
 		for (int i = 0; i < buckets.length; i++) {
-			Node temp = buckets[i];
+			Node<T> temp = buckets[i];
 			if (temp != null) {
 				result += i + "\t";
 				while (temp != null) {
