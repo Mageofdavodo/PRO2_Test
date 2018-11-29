@@ -16,7 +16,7 @@ public class DictionaryHashMap<K, V> implements Dictionary<K, V> {
 	}
 
 	@Override
-	public Object get(K key) {
+	public V get(K key) {
 		int i = key.hashCode() % N;
 		java.util.Map<Object, Object> map = tabel[i];
 		return map.get(key);
@@ -34,13 +34,13 @@ public class DictionaryHashMap<K, V> implements Dictionary<K, V> {
 	}
 
 	@Override
-	public Object put(K key, V value) {
+	public V put(K key, V value) {
 		// TODO
 		return null;
 	}
 
 	@Override
-	public Object remove(K key) {
+	public V remove(K key) {
 		// TODO
 		return null;
 	}

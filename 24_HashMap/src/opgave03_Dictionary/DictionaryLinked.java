@@ -41,19 +41,20 @@ public class DictionaryLinked<K, V> implements Dictionary<K, V> {
 	public V put(K key, V value) {
 		V oldValue = null;
 		if (key != null || value != null) {
-			Node temp = start;
+
 			boolean found = false;
-			if (start == null) {
+			if (start.key == null) {
 				start.key = key;
 				start.value = value;
+				start.next = new Node();
+				size++;
 			} else {
-				while (!found && temp != null) {
-
-					if (temp != null && temp.key.equals(key)) {
+				Node temp = start;
+				while (!found && temp.next != null) {
+					if (temp.key.equals(key)) {
 						oldValue = temp.value;
 						temp.value = value;
 						found = true;
-						size++;
 					}
 					temp = temp.next;
 				}
@@ -61,11 +62,13 @@ public class DictionaryLinked<K, V> implements Dictionary<K, V> {
 					temp = new Node();
 					temp.key = key;
 					temp.value = value;
+					temp.next = new Node();
 					size++;
 				}
 			}
+			return oldValue;
 		}
-		return oldValue;
+		return null;
 	}
 
 	@Override
