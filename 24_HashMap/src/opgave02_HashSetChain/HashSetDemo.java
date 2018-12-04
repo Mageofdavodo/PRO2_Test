@@ -44,6 +44,7 @@ public class HashSetDemo {
 		names.add("Alpha");
 		names.add("Torben");
 		System.out.println(names);
+		System.out.println(names.size());
 		System.out.println(names.arraySize());
 	}
 

@@ -72,7 +72,7 @@ public class HashSetChaining<T> {
 			buckets[h] = newNode;
 			currentSize++;
 			double loadFactor = 0;
-			loadFactor = 1.0 * currentSize / buckets.length;
+			loadFactor = currentSize / buckets.length;
 			if (loadFactor >= 0.75) {
 				rehash();
 			}
@@ -96,9 +96,7 @@ public class HashSetChaining<T> {
 					add((T) temp.data);
 					temp = temp.next;
 				}
-
 			}
-
 		}
 	}
 
