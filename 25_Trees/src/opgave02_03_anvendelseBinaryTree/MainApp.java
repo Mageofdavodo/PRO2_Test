@@ -1,4 +1,4 @@
-package opgave02_anvendelseBinaryTree;
+package opgave02_03_anvendelseBinaryTree;
 
 public class MainApp {
 

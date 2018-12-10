@@ -1,4 +1,4 @@
-package opgave02_anvendelseBinaryTree;
+package opgave02_03_anvendelseBinaryTree;
 
 /**
  * A binary tree in which each node has two children.
@@ -146,8 +146,8 @@ public class BinaryTree<E> {
 
 	private void postorder(Node n) {
 		if (n != null) {
-			preorder(n.left);
-			preorder(n.right);
+			postorder(n.left);
+			postorder(n.right);
 			System.out.println(n.data);
 		}
 
