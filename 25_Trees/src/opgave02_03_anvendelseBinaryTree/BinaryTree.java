@@ -107,7 +107,7 @@ public class BinaryTree<E> {
 		return height(root);
 	}
 
-	public int height(Node n) {
+	private int height(Node n) {
 		if (n == null) {
 			return 0;
 		} else {
@@ -119,7 +119,7 @@ public class BinaryTree<E> {
 		inorder(root);
 	}
 
-	public void inorder(Node n) {
+	private void inorder(Node n) {
 		if (n != null) {
 			inorder(n.left);
 			System.out.println(n.data);
@@ -153,20 +153,21 @@ public class BinaryTree<E> {
 
 	}
 
-	public int getSum() {
+	public int calcSum() {
 		return calcSum(root);
 	}
 
 	private int calcSum(Node n) {
-		if (n != null) {
+
+		if (n != null && n.data instanceof Integer) {
 			return (int) n.data + calcSum(n.left) + calcSum(n.right);
 		} else {
 			return 0;
 		}
 	}
 
-	public double getAvg() {
-		return 1.0 * getSum() / size();
+	public double calcAvg() {
+		return 1.0 * calcSum() / size();
 	}
 
 	// Private recursive helper method

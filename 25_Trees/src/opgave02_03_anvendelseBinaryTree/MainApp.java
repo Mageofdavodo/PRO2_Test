@@ -4,22 +4,22 @@ public class MainApp {
 
 	public static void main(String[] args) {
 
-		BinaryTree<Integer> allTheBottom = new BinaryTree<Integer>(23);
+		BinaryTree<Integer> tree23 = new BinaryTree<Integer>(23);
 
-		BinaryTree<Integer> bottom1 = new BinaryTree<Integer>(15, allTheBottom, null);
-		BinaryTree<Integer> bottom2 = new BinaryTree<Integer>(25);
+		BinaryTree<Integer> tree15 = new BinaryTree<Integer>(15, tree23, null);
+		BinaryTree<Integer> tree25 = new BinaryTree<Integer>(25);
 
-		BinaryTree<Integer> mid1 = new BinaryTree<Integer>(11, null, bottom1);
-		BinaryTree<Integer> mid2 = new BinaryTree<Integer>(30, bottom2, null);
+		BinaryTree<Integer> tree11 = new BinaryTree<Integer>(11, null, tree15);
+		BinaryTree<Integer> tree30 = new BinaryTree<Integer>(30, tree25, null);
 
-		BinaryTree<Integer> topMid1 = new BinaryTree<Integer>(22, mid1, mid2);
+		BinaryTree<Integer> tree22 = new BinaryTree<Integer>(22, tree11, tree30);
 
-		BinaryTree<Integer> bottom3 = new BinaryTree<Integer>(88);
-		BinaryTree<Integer> mid3 = new BinaryTree<Integer>(90, bottom3, null);
+		BinaryTree<Integer> tree88 = new BinaryTree<Integer>(88);
+		BinaryTree<Integer> tree90 = new BinaryTree<Integer>(90, tree88, null);
 
-		BinaryTree<Integer> topMid2 = new BinaryTree<Integer>(77, null, mid3);
+		BinaryTree<Integer> tree77 = new BinaryTree<Integer>(77, null, tree90);
 
-		BinaryTree<Integer> root = new BinaryTree<Integer>(45, topMid1, topMid2);
+		BinaryTree<Integer> root = new BinaryTree<Integer>(45, tree22, tree77);
 
 		System.out.println(root.height());
 		System.out.println();
@@ -29,9 +29,11 @@ public class MainApp {
 		System.out.println();
 		root.postorder();
 		System.out.println();
-		System.out.println("total sum: " + root.getSum());
+		System.out.println("total sum: " + root.calcSum());
 		System.out.println();
-		System.out.println("Average: " + root.getAvg());
+		System.out.println("Størrelsen af træet: " + root.size());
+		System.out.println();
+		System.out.println("Average: " + root.calcAvg());
 	}
 
 }
