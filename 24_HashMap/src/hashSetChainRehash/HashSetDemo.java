@@ -1,4 +1,4 @@
-package opgave02_HashSetChain;
+package hashSetChainRehash;
 
 /**
  * This program demonstrates the hash set class.

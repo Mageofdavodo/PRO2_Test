@@ -32,7 +32,45 @@ public class SortedDoublyLinkedList {
 	 * @param element det der indsættes
 	 */
 	public void addElement(String element) {
-		// TODO: lav mig
+		Node node = new Node();
+		node.data = element;
+
+		if (first.next == last && last.previous == first) {
+			node.next = last;
+			node.previous = first;
+			first.next = node;
+			last.previous = node;
+		} else {
+			boolean found = false;
+			Node temp = first.next;
+			while (!found) {
+				if (temp.data != null) {
+					if (temp.data.compareTo(node.data) > 0) {
+						found = true;
+					} else {
+						temp = temp.next;
+					}
+				} else {
+					found = true;
+				}
+			}
+			if (found) {
+				node.next = temp;
+				node.previous = temp.previous;
+				temp.previous.next = node;
+				temp.previous = node;
+			}
+		}
+	}
+
+	public void print() {
+		if (first.next != null) {
+			Node temp = first.next;
+			while (temp.data != null) {
+				System.out.println(temp.data);
+				temp = temp.next;
+			}
+		}
 	}
 
 	/**

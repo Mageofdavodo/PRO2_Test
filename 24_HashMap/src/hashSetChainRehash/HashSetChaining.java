@@ -1,4 +1,4 @@
-package opgave02_HashSetChain;
+package hashSetChainRehash;
 
 import java.util.NoSuchElementException;
 
